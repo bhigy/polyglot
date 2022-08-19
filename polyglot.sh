@@ -299,7 +299,7 @@ _polyglot_branch_status() {
 
     [ -n "$POLYGLOT_SYMBOLS" ] && POLYGLOT_SYMBOLS=" $POLYGLOT_SYMBOLS"
 
-    printf ' (%s%s)' "${POLYGLOT_REF#refs/heads/}" "$POLYGLOT_SYMBOLS"
+    printf ' (%s%s)' "${POLYGLOT_REF#refs/heads/}" "$POLYGLOT_SYMBOLS"
   fi
 
   unset POLYGLOT_REF POLYGLOT_GIT_STATUS POLYGLOT_SYMBOLS
