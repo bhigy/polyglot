@@ -400,6 +400,16 @@ _polyglot_venv() {
   unset POLYGLOT_VENV
 }
 
+###########################################################
+# Output kubernetes namespace
+###########################################################
+_polyglot_kubernetes_namespace() {
+  KUBERNETES_NAMESPACE=$(kubectl config view --minify --output 'jsonpath={..namespace}' 2> /dev/null)
+  [ -n "$KUBERNETES_NAMESPACE" ] && printf '[%s] ' "$KUBERNETES_NAMESPACE"
+
+  unset KUBERNETES_NAMESPACE
+}
+
 #####################################################################
 # zsh
 #####################################################################
@@ -506,6 +516,7 @@ elif [ -n "$BASH_VERSION" ]; then
       if _polyglot_has_colors; then
         PS1="\[\e[01;31m\]\$(_polyglot_exit_status \$?)\[\e[0m\]"
         PS1+="\$(_polyglot_venv)"
+        PS1+="\$(_polyglot_kubernetes_namespace)"
         PS1+="\[\e[01;32m\]\u$(echo -n "$POLYGLOT_HOSTNAME_STRING")\[\e[0m\] "
         case $BASH_VERSION in
           # bash, before v4.0, did not have $PROMPT_DIRTRIM
